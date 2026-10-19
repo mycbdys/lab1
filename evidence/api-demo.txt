@@ -1,0 +1,49 @@
+﻿
+HDU IS Lab 1 - API acceptance walkthrough
+timestamp: 2026-10-19T11:10:05.8730102+08:00
+python: Python 3.13.3
+base_url: http://127.0.0.1:5055
+database: C:\Users\木又寸\Documents\deepseek-harness\default-workspace\lab1\instance\lab1.sqlite3
+
+== 1. Seed demo users ==
+created user 'alice' (id=1)
+created user 'bob' (id=2)
+demo credentials: alice/Alice#2026, bob/Bob#2026
+
+== 2. POST /auth/login (valid credentials) ==
+{"token_type":"Bearer","expires_in":900}
+access_token: eyJhbGciOiJIUzI1NiIsInR5... (redacted)
+
+== 3. GET /api/data without a token ==
+HTTP 401 (expected 401)
+
+== 4. POST /api/posts with a stored-XSS payload ==
+{"body":"XSS test","created_at":"2026-10-19 03:10:10","id":1,"title":"&lt;script&gt;alert(1)&lt;/script&gt;"}
+
+HTTP 201
+
+== 5. GET /api/data (escaped output) ==
+{"posts":[{"body":"XSS test","created_at":"2026-10-19 03:10:10","id":1,"title":"&lt;script&gt;alert(1)&lt;/script&gt;"}],"username":"alice"}
+
+== 6. SQL injection attempts ==
+username payload -> {"error":"Bad Request","message":"username must be 3-32 characters (letters, digits, . _ -)"}
+
+HTTP 400
+password payload -> {"error":"Unauthorized","message":"Invalid username or password"}
+
+HTTP 401
+
+== 7. Security headers on /health ==
+HTTP/1.1 200 OK
+Server: Werkzeug/3.1.9 Python/3.13.3
+Date: Mon, 19 Oct 2026 03:10:11 GMT
+Content-Type: application/json
+Content-Length: 16
+Content-Security-Policy: default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: no-referrer
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Connection: close
+
+RESULT: API walkthrough completed.

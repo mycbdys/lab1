@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pylibs/
+.pylibs2/
+.pylibs3/
+instance/
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Local sandbox/bootstrap helpers (not part of the project)
+.pipfix/
+.tmp/
+wheelhouse/
+_probe*.py
+
+# Secrets
+.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
