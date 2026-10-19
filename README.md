@@ -237,8 +237,17 @@ layer. The exact observed evidence is in `evidence/` and `cve/.../evidence/`.
 
 ## 10. Submission links
 
-- Public repository: `[to be filled after pushing to GitHub/GitLab]`
-- Last successful pipeline run: `[to be filled from the Actions tab]`
+- Student: 李泽涛 (LiZetao) — HDU number 23320332 — group 23320113 — variant: N/A (not assigned)
+- Public repository: `[add after creating the remote]`
+- Last successful pipeline run: `[add after the first green Actions run]`
 
-Replace these two placeholders before submitting. The report title page also contains
-placeholders for surname/name, variant number and HDU number.
+The local repository already contains one commit on `main`. To publish it, create an empty
+public repository on GitHub or GitLab, then run:
+
+```bash
+git remote add origin <your-repository-url>
+git push -u origin main
+```
+
+The workflow starts automatically on the push; open the repository's **Actions** tab, wait
+for the green run and copy its URL into the line above.

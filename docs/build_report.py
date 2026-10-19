@@ -213,10 +213,10 @@ def add_title_page(doc: Document) -> None:
     doc.add_paragraph()
 
     info = [
-        ("Variant", "[variant number]"),
-        ("Student", "[Surname Name]"),
-        ("HDU number", "[HDU number]"),
-        ("Group", "[group]"),
+        ("Variant", "N/A (not assigned)"),
+        ("Student", "李泽涛 / LiZetao"),
+        ("HDU number", "23320332"),
+        ("Group", "23320113"),
         ("Repository", "[public GitHub/GitLab URL]"),
         ("Submission date", "19 October 2026"),
     ]
@@ -910,7 +910,7 @@ def add_section_10(doc: Document) -> None:
             ("Screenshots of SAST/SCA and exploit", "Raw transcripts in evidence/", "Optionally screenshot the same runs"),
             ("Link to last successful pipeline run", "Workflow committed; not run on GitHub", "Push, open Actions, copy run URL"),
             ("Folder with fixes", "cve/CVE-2022-29078/fixed/ + patches/fix.diff", "None"),
-            ("Title page data", "Placeholders for name, variant, HDU number", "Fill before printing"),
+            ("Title page data", "Filled: 李泽涛 / LiZetao, 23320332, group 23320113", "None"),
         ],
         widths=[7.0, 6.2, 6.2],
         font_size=8,
@@ -929,7 +929,8 @@ git push -u origin main""",
 def add_section_11(doc: Document) -> None:
     doc.add_heading("11. Limitations and honest disclosure", level=1)
     doc.add_paragraph(
-        "Three limitations are stated openly so the report does not claim more than was done."
+        "The environmental limitations and evidence choices are stated openly so the report does "
+        "not claim more than was done."
     )
     doc.add_paragraph(
         "Docker was not installed on the build machine. The CVE environment was therefore launched "
@@ -945,12 +946,15 @@ def add_section_11(doc: Document) -> None:
         "in after pushing."
     )
     doc.add_paragraph(
+        "The title page now uses the student's data: 李泽涛 (LiZetao), HDU number 23320332, group "
+        "23320113; no variant was assigned, so it is marked N/A. Only the public repository and "
+        "pipeline-run links remain to be filled after pushing."
+    )
+    doc.add_paragraph(
         "The manual asks for screenshots. The submission contains raw terminal transcripts with "
         "timestamps, exact commands and outputs, which are stronger evidence than an image because "
         "they can be re-run and diffed. Screenshots can be taken from the same scripts "
-        "(scripts/api_demo.ps1 and cve/CVE-2022-29078/run_demo.ps1) if the instructor requires "
-        "images. Personal data (student name, variant, HDU number) was not provided, so the title "
-        "page uses placeholders."
+        "(scripts/api_demo.ps1 and cve/CVE-2022-29078/run_demo.ps1) if the instructor requires images."
     )
     doc.add_paragraph(
         "The small in-memory login limiter and SQLite database are appropriate for a lab but not for "
@@ -1076,7 +1080,7 @@ def main() -> None:
     add_section_12(doc)
     add_appendix(doc)
     doc.core_properties.title = "Secure REST API Development with CI/CD and Real CVE Vulnerability Analysis"
-    doc.core_properties.author = "HDU IS student"
+    doc.core_properties.author = "李泽涛 (LiZetao)"
     doc.core_properties.subject = "Laboratory Work 1"
     doc.save(OUT)
     print("wrote", OUT)

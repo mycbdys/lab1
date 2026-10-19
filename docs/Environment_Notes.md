@@ -54,8 +54,9 @@ be replaced before submission:
 1. `README.md` §10 — public repository URL.
 2. `README.md` §10 — URL of the last successful pipeline run.
 
-The title page of the report also has placeholders for surname/name, variant number and
-HDU number because those personal data were not provided.
+The title page now uses the student's data: 李泽涛 (LiZetao), HDU number 23320332,
+group 23320113; no variant was assigned, so it is marked N/A. Only the public repository
+URL and the pipeline-run URL remain as placeholders.
 
 ## Commands used to produce the evidence
 
