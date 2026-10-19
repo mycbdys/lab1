@@ -31,7 +31,9 @@ analysis and fix of a real CVE (CVE-2022-29078, EJS template-engine RCE).
 | 10 | Verify the fix and run regression tests | `evidence/fixed-run.txt`, `pytest` suite |
 | 11 | Structured report | `docs/Lab1_Report.docx` / `.pdf` |
 
-Control questions (8) are answered in the report (§8) and in `docs/Control_Questions.md`.
+Control questions (8) are answered in the separate document
+`docs/Lab1_Control_Questions.docx` (Markdown source: `docs/Control_Questions.md`). The main
+report only points to that document and does not duplicate the answers.
 
 ---
 

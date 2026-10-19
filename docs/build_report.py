@@ -260,7 +260,7 @@ def add_contents(doc: Document) -> None:
         "5. Security measures",
         "6. CI/CD pipeline with SAST and SCA",
         "7. CVE-2022-29078: reproduction, root cause and fix",
-        "8. Control questions",
+        "8. Control questions (separate document)",
         "9. Testing and evaluation",
         "10. Submission package",
         "11. Limitations and honest disclosure",
@@ -829,24 +829,15 @@ RESULT: FIXED - attack blocked, page still renders (no code execution, no regres
 def add_section_8(doc: Document) -> None:
     doc.add_heading("8. Control questions", level=1)
     doc.add_paragraph(
-        "The eight control questions from the manual are answered below. Each answer is self-contained "
-        "and refers to this work where it is relevant."
+        "The eight control questions from the manual are answered in the separate document "
+        "Lab1_Control_Questions.docx, which is submitted alongside this report. Keeping the answers "
+        "in a dedicated file keeps this report focused on the implementation, the CI/CD evidence and "
+        "the CVE case study; the questions and answers are not duplicated here."
     )
-    text = (HERE / "Control_Questions.md").read_text(encoding="utf-8")
-    parts = re.split(r"^## ", text, flags=re.MULTILINE)[1:]
-    for part in parts:
-        lines = part.strip().split("\n")
-        title = lines[0].strip()
-        match = re.match(r"^(\d+)\.\s*(.*)$", title)
-        if match:
-            title = f"Q{match.group(1)}. {match.group(2)}"
-        body = "\n".join(lines[1:]).strip()
-        doc.add_heading(title, level=2)
-        for paragraph_text in re.split(r"\n\s*\n", body):
-            cleaned = " ".join(paragraph_text.split())
-            cleaned = cleaned.replace("`", "").replace("**", "")
-            if cleaned:
-                doc.add_paragraph(cleaned)
+    doc.add_paragraph(
+        "The separate document contains all eight questions with full answers, the student's details "
+        "and the same formatting as this report."
+    )
 
 
 def add_section_9(doc: Document) -> None:
