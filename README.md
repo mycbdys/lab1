@@ -32,9 +32,10 @@ analysis and fix of a real CVE (CVE-2022-29078, EJS template-engine RCE).
 | 11 | Structured report | `docs/Lab1_Report.docx` / `.pdf` |
 
 Control questions (8) are answered in `docs/Lab1_Control_Questions.docx` (full answers,
-4 pages) and `docs/Lab1_Control_Questions_Short.docx` (short answers, 1 page). Markdown
-sources are `docs/Control_Questions.md` and `docs/Control_Questions_Short.md`. The main
-report only points to these documents and does not duplicate the answers.
+4 pages), `docs/Lab1_Control_Questions_Short.docx` (short answers, 1 page) and
+`docs/Lab1_Control_Questions_Simple.docx` (simple wording, 1 page). Markdown sources are
+`docs/Control_Questions.md`, `docs/Control_Questions_Short.md` and
+`docs/Control_Questions_Simple.md`. The main report only points to these documents.
 
 ---
 
