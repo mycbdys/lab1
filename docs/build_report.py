@@ -668,11 +668,17 @@ def add_section_7(doc: Document) -> None:
     doc.add_page_break()
     doc.add_heading("7.2 Environment", level=2)
     doc.add_paragraph(
-        "The manual's step 6 assumes Docker and Vulhub. Docker was not installed on the build machine, "
-        "so the vulnerable and fixed applications were run directly with Node.js 20 using the same "
-        "package versions. This changes only the isolation layer, not the vulnerability, the request, "
-        "the root cause or the fix. Vulhub-style Dockerfile and docker-compose files are included so "
-        "the environment can be started with docker compose up --build on a machine with Docker."
+        "The manual's step 6 assumes Docker and Vulhub. Docker Desktop was not installed on the "
+        "Windows host, so the first execution used Node.js 20 with the same package versions. To "
+        "verify the Docker/Vulhub deliverable in a real Docker environment, the same compose files "
+        "were also executed on the GitHub Actions ubuntu-latest runner (workflow cve-docker.yml): "
+        "the vulnerable container returned HTTP 200 and pwned.txt inside it contained "
+        "uid=0(root) gid=0(root), while the fixed container rendered the normal page and had no "
+        "pwned.txt. Both execution paths are therefore covered."
+    )
+    doc.add_paragraph(
+        "Docker run: https://github.com/mycbdys/lab1/actions/runs/39195350651 (artifact "
+        "cve-docker-evidence; copies under docs/evidence/docker-ci/)."
     )
     add_table(
         doc,
@@ -923,11 +929,14 @@ def add_section_11(doc: Document) -> None:
         "not claim more than was done."
     )
     doc.add_paragraph(
-        "Docker was not installed on the build machine. The CVE environment was therefore launched "
-        "with the same package versions directly on Node.js 20, and Vulhub-style Dockerfiles and "
-        "compose files are supplied but were not executed. The vulnerability, payload, root cause and "
-        "fix are unchanged; only the isolation layer differs. A grader with Docker can run docker "
-        "compose up --build in cve/CVE-2022-29078 to obtain the same vulnerable service on port 3000."
+        "Docker Desktop was not installed on the Windows host: installing it requires administrator "
+        "rights, WSL2/Virtual Machine Platform and a reboot, none of which was available in this "
+        "session. The CVE environment was therefore first launched with Node.js 20, and the same "
+        "compose files were then executed in real Docker on the GitHub Actions ubuntu-latest runner "
+        "(run 39195350651): pwned.txt inside the vulnerable container contained uid=0(root), while "
+        "the fixed container blocked the attack. The Docker/Vulhub path is therefore verified in "
+        "Docker, not only described; only a local Docker Desktop run on the Windows host is missing, "
+        "and it does not change the code, root cause or fix."
     )
     doc.add_paragraph(
         "The repository is public at https://github.com/mycbdys/lab1. The GitHub Actions pipeline "
@@ -1020,11 +1029,12 @@ docker compose -f docker-compose.fixed.yml up --build""",
             ("app/", "Flask application: factory, config, db, security, auth, api, schema"),
             ("tests/", "conftest.py, test_auth.py, test_api.py (21 tests)"),
             ("scripts/", "seed.py, api_demo.ps1"),
-            (".github/workflows/ci.yml", "test + Bandit + pip-audit pipeline"),
+            (".github/workflows/", "ci.yml (tests + Bandit + pip-audit); cve-docker.yml (Docker compose)"),
             ("security/", "bandit-report.json, pip-audit-report.json, README.md"),
             ("cve/CVE-2022-29078/", "vulnerable/, fixed/, patches/, evidence/, run_demo.ps1/.sh, Docker files"),
-            ("evidence/", "api-demo.txt, api-server.log, login/SQLi bodies"),
-            ("docs/", "this report, Control_Questions.md, Task_Checklist.md, Environment_Notes.md"),
+            ("evidence/", "api-demo.txt (API acceptance transcript)"),
+            ("docs/", "reports, control questions, task checklist, environment notes"),
+            ("docs/evidence/docker-ci/", "Docker Compose run evidence (pwned.txt, responses, log)"),
             ("README.md", "Project overview, API docs, security design, CVE summary"),
         ],
         widths=[6.0, 10.4],

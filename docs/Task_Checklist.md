@@ -11,7 +11,7 @@ folder, not on intention.
 | 3 | Implement SQLi protection, XSS protection, JWT issuance and verification, password hashing | Done | `app/db.py`, `app/security.py`, `app/api.py`; tests `tests/test_auth.py`, `tests/test_api.py` |
 | 4 | CI/CD pipeline (GitHub Actions or GitLab CI) with SAST and SCA on every push/PR | Done (local + GitHub) | `.github/workflows/ci.yml`; run <https://github.com/mycbdys/lab1/actions/runs/39194790820>; `security/` reports |
 | 5 | Test the API with Postman or curl; capture scanner reports | Done | `scripts/api_demo.ps1`, `evidence/api-demo.txt`, `security/` |
-| 6 | Install Docker/Compose, clone Vulhub, choose and study a CVE directory | Partially (Docker absent) | `cve/CVE-2022-29078/` with Vulhub-style Docker files; CVE studied from NVD/OSV/GHSA; see `docs/Environment_Notes.md` |
+| 6 | Install Docker/Compose, clone Vulhub, choose and study a CVE directory | Done (Docker on GitHub runner; local Docker absent) | `cve/CVE-2022-29078/` with Vulhub-style Docker files; compose run <https://github.com/mycbdys/lab1/actions/runs/39195350651>; evidence `docs/evidence/docker-ci/` |
 | 7 | Launch the vulnerable environment, reproduce the attack, record commands/requests | Done | `cve/CVE-2022-29078/run_demo.ps1`; `cve/CVE-2022-29078/evidence/vulnerable-run.txt` |
 | 8 | Root-cause analysis of the CVE (logic, input handling, configuration) | Done | `cve/CVE-2022-29078/README.md` §4; report §7.4 |
 | 9 | Develop and apply the fix (config, version bump, code), rebuild | Done | `cve/CVE-2022-29078/fixed/`; `docker-compose.fixed.yml`; diff in report §7.5 |
@@ -42,9 +42,10 @@ folder, not on intention.
 
 ## Known limitations to disclose in the report
 
-- Docker was not installed on the build machine, so the CVE environment was launched with
-  the same package versions directly on Node.js 20 instead of through `docker compose`.
-  Dockerfiles and compose files are provided and were reviewed, but not executed.
+- Local Docker Desktop was not installed on the Windows host (admin + WSL2 + reboot were
+  unavailable). The Compose files were executed in real Docker on the GitHub Actions
+  Ubuntu runner (`cve-docker.yml`, run 39195350651): the vulnerable container ran `id` as
+  root and the fixed container blocked it. The local Node.js run is also documented.
 - The manual asks for screenshots. The raw terminal transcripts are in `evidence/`; the
   report reproduces the relevant lines verbatim and can be supplemented with screenshots
   taken from the same runs (`run_demo.ps1`, `api_demo.ps1`).

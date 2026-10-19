@@ -206,10 +206,13 @@ Latest local results:
 - Fixed environment: `cve/CVE-2022-29078/fixed` (EJS 3.1.7, allow-listed render data).
 - Reproduce: `pwsh cve/CVE-2022-29078/run_demo.ps1 -Mode vulnerable` (or `run_demo.sh`).
 - Verify fix: `pwsh cve/CVE-2022-29078/run_demo.ps1 -Mode fixed`.
-- Docker: `docker compose -f cve/CVE-2022-29078/docker-compose.yml up --build`.
+- Docker: `docker compose -f cve/CVE-2022-29078/docker-compose.yml up --build`; the same
+  compose files were executed in real Docker on GitHub Actions
+  (<https://github.com/mycbdys/lab1/actions/runs/39195350651>, artifact
+  `cve-docker-evidence`, copies in `docs/evidence/docker-ci/`).
 
-Evidence is stored in `cve/CVE-2022-29078/evidence/`; the full analysis is in
-`cve/CVE-2022-29078/README.md` and report §7.
+Evidence is stored in `cve/CVE-2022-29078/evidence/` and `docs/evidence/docker-ci/`; the
+full analysis is in `cve/CVE-2022-29078/README.md` and report §7.
 
 ---
 
@@ -229,13 +232,14 @@ stored literally, security headers.
 
 ## 9. Environment note
 
-The laboratory machine used to build this submission did **not** have Docker installed
-(`docker` was not on `PATH`). The CVE was therefore reproduced with the same vulnerable
-package versions running directly on Node.js 20, and Vulhub-style `Dockerfile` /
-`docker-compose.yml` files are included so the same environment can be launched with
-`docker compose up --build` on a machine with Docker. This does not change the
-vulnerability, the exploit, the root cause or the fix; it only changes the isolation
-layer. The exact observed evidence is in `evidence/` and `cve/.../evidence/`.
+The Windows host used to build this submission did **not** have Docker Desktop installed
+(`docker` was not on `PATH`; installing it requires administrator rights, WSL2 and a
+reboot). The CVE was therefore reproduced locally with the same vulnerable package
+versions running directly on Node.js 20, and the same `Dockerfile` / `docker-compose.yml`
+files were executed in real Docker on the GitHub Actions Ubuntu runner — the vulnerable
+container executed `id` as root and the fixed container blocked the attack. Evidence is in
+`cve/.../evidence/` and `docs/evidence/docker-ci/`. This does not change the vulnerability,
+the exploit, the root cause or the fix.
 
 ---
 

@@ -18,6 +18,9 @@ npm-debug.log*
 .tmp/
 wheelhouse/
 _probe*.py
+.ci-evidence/
+.dsh-office-*/
+_deliver/
 
 # Secrets
 .env

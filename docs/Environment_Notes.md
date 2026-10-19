@@ -10,29 +10,28 @@
 | Node.js | v20.18.0 |
 | npm | 10.8.2 |
 | Git | 2.54.0 |
-| Docker | **not installed** (no `docker` / `docker compose` on `PATH`) |
+| Docker | **not installed locally**; Compose executed on GitHub Actions (see below) |
 
 ## What this changed
 
 ### CVE environment
 
-The manual's step 6 assumes Docker and `docker compose`. Docker was not available, so the
-vulnerable and fixed EJS applications were launched directly with Node.js 20 using the
-same package versions (`ejs@3.1.6` and `ejs@3.1.7`, `express@4.21.2`). This changes only
-the isolation layer, not the vulnerability, the request, the root cause or the fix.
+The manual's step 6 assumes Docker and `docker compose`. Docker Desktop was not installed
+on the Windows host: installing it requires administrator rights, WSL2/Virtual Machine
+Platform and a reboot, none of which was available in this session. The vulnerable and
+fixed EJS applications were therefore first launched directly with Node.js 20 using the
+same package versions (`ejs@3.1.6` and `ejs@3.1.7`, `express@4.21.2`).
 
-Vulhub-style artifacts are still delivered so the same environment can be started on a
-machine with Docker:
+The same compose files were then executed in real Docker on the GitHub Actions
+`ubuntu-latest` runner (workflow `.github/workflows/cve-docker.yml`):
 
-```bash
-cd cve/CVE-2022-29078
-docker compose up --build
-docker compose -f docker-compose.fixed.yml up --build
-```
+<https://github.com/mycbdys/lab1/actions/runs/39195350651>
 
-The Dockerfiles and compose files were reviewed but could not be executed on this
-machine; that is stated in the report instead of claiming a Docker run that did not
-happen.
+The vulnerable container returned HTTP 200 and `pwned.txt` inside it contained
+`uid=0(root) gid=0(root)`; the fixed container rendered the normal page and had no
+`pwned.txt`. Copies are in `docs/evidence/docker-ci/`. The Docker/Vulhub path is therefore
+verified in Docker, not merely described; only a local Docker Desktop run on the Windows
+host is missing.
 
 ### Payload stdio option
 
