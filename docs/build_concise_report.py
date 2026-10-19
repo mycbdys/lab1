@@ -92,6 +92,15 @@ def add_table(doc: Document, headers, rows, widths=None, size=8.5):
     return table
 
 
+def add_caption(doc: Document, text: str) -> None:
+    p = doc.add_paragraph()
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r = p.add_run(text)
+    r.italic = True
+    r.font.size = Pt(8.5)
+    r.font.color.rgb = GREY
+
+
 def style(doc: Document) -> None:
     section = doc.sections[0]
     section.page_width = Cm(21)
@@ -296,7 +305,28 @@ x;process.mainModule.require("child_process").execSync("id > pwned.txt");s""",
         "only a 64-character scalar name. Neither fix relies on a blocklist of characters."
     )
 
-    doc.add_heading("5. Testing and submission", level=1)
+    doc.add_heading("5. Evidence (screenshots)", level=1)
+    doc.add_paragraph(
+        "The screenshots below were captured from the public GitHub repository and Actions pages; "
+        "they are not mock-ups. The first shows the three CI jobs passing, and the second shows the "
+        "Docker run steps plus the files produced inside the containers."
+    )
+    doc.add_picture(str(HERE / "images" / "screenshots" / "combined-ci.png"), width=Cm(16.2))
+    doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    add_caption(
+        doc,
+        "Figure 1. GitHub Actions: Unit tests, SAST (Bandit) and SCA (pip-audit) all pass; the Docker "
+        "job builds the vulnerable stack, reproduces the CVE, starts the fixed stack and verifies it.",
+    )
+    doc.add_picture(str(HERE / "images" / "screenshots" / "combined-cve.png"), width=Cm(16.2))
+    doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    add_caption(
+        doc,
+        "Figure 2. Docker evidence: pwned.txt from the vulnerable container contains uid=0(root); "
+        "the fixed container runs EJS 3.1.7.",
+    )
+
+    doc.add_heading("6. Testing and submission", level=1)
     doc.add_paragraph(
         "The pytest suite covers login, SQL injection attempts, bcrypt storage, rate limiting, "
         "missing/tampered/expired/alg=none tokens, per-user isolation, XSS escaping, SQL "

@@ -212,8 +212,9 @@ Latest local results:
   (<https://github.com/mycbdys/lab1/actions/runs/39195350651>, artifact
   `cve-docker-evidence`, copies in `docs/evidence/docker-ci/`).
 
-Evidence is stored in `cve/CVE-2022-29078/evidence/` and `docs/evidence/docker-ci/`; the
-full analysis is in `cve/CVE-2022-29078/README.md` and report §7.
+Evidence is stored in `cve/CVE-2022-29078/evidence/` and `docs/evidence/docker-ci/`; real
+screenshots of the GitHub Actions runs are in `docs/images/screenshots/` and Figures 1–2 of
+the report. The full analysis is in `cve/CVE-2022-29078/README.md` and report §7.
 
 ---
 

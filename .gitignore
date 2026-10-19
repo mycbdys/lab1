@@ -20,6 +20,7 @@ wheelhouse/
 _probe*.py
 .ci-evidence/
 .dsh-office-*/
+.edge-*/
 _deliver/
 
 # Secrets

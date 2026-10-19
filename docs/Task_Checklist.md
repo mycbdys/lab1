@@ -46,6 +46,6 @@ folder, not on intention.
   unavailable). The Compose files were executed in real Docker on the GitHub Actions
   Ubuntu runner (`cve-docker.yml`, run 39195350651): the vulnerable container ran `id` as
   root and the fixed container blocked it. The local Node.js run is also documented.
-- The manual asks for screenshots. The raw terminal transcripts are in `evidence/`; the
-  report reproduces the relevant lines verbatim and can be supplemented with screenshots
-  taken from the same runs (`run_demo.ps1`, `api_demo.ps1`).
+- Real screenshots of the GitHub Actions runs and Docker evidence are in
+  `docs/images/screenshots/` and Figures 1–2 of the report. Raw terminal transcripts remain
+  in `evidence/` for re-checking.
