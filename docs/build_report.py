@@ -16,7 +16,7 @@ from docx.shared import Cm, Pt, RGBColor
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-OUT = HERE / "Lab1_Report.docx"
+OUT = HERE / "Lab1_Report_Detailed.docx"
 
 BLUE = RGBColor(0x1F, 0x4E, 0x79)
 DARK = RGBColor(0x21, 0x25, 0x29)
