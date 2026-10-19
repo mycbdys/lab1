@@ -2,6 +2,8 @@
 
 **Secure REST API Development with CI/CD and Real CVE Vulnerability Analysis**
 
+[![CI](https://github.com/mycbdys/lab1/actions/workflows/ci.yml/badge.svg)](https://github.com/mycbdys/lab1/actions/workflows/ci.yml)
+
 This repository is the complete submission for Work 1 of the HDU Information Security
 laboratory manual. It contains (1) a hardened Flask REST API, (2) an automated CI/CD
 pipeline with SAST and SCA scanners, and (3) a controlled reproduction, root-cause
@@ -238,16 +240,15 @@ layer. The exact observed evidence is in `evidence/` and `cve/.../evidence/`.
 ## 10. Submission links
 
 - Student: 李泽涛 (LiZetao) — HDU number 23320332 — group 23320113 — variant: N/A (not assigned)
-- Public repository: `[add after creating the remote]`
-- Last successful pipeline run: `[add after the first green Actions run]`
+- Public repository: <https://github.com/mycbdys/lab1>
+- Last successful pipeline run: <https://github.com/mycbdys/lab1/actions/runs/39194790820>
 
-The local repository already contains one commit on `main`. To publish it, create an empty
-public repository on GitHub or GitLab, then run:
+The repository is public and the CI workflow runs on every push and pull request. The run
+linked above executed all three jobs successfully: **Unit tests**, **SAST (Bandit)** and
+**SCA (pip-audit)**.
+
+To update the published repository after a local change:
 
 ```bash
-git remote add origin <your-repository-url>
-git push -u origin main
+git push
 ```
-
-The workflow starts automatically on the push; open the repository's **Actions** tab, wait
-for the green run and copy its URL into the line above.

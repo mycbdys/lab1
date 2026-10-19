@@ -217,7 +217,7 @@ def add_title_page(doc: Document) -> None:
         ("Student", "李泽涛 / LiZetao"),
         ("HDU number", "23320332"),
         ("Group", "23320113"),
-        ("Repository", "[public GitHub/GitLab URL]"),
+        ("Repository", "https://github.com/mycbdys/lab1"),
         ("Submission date", "19 October 2026"),
     ]
     table = doc.add_table(rows=0, cols=2)
@@ -326,7 +326,7 @@ def add_section_2(doc: Document) -> None:
         "was run; \u201cpartial\u201d is used only where an external dependency was unavailable."
     )
     rows = [
-        ("1", "Choose stack, create project, init git, link remote", "Done", "Flask project, requirements.txt, local git history; remote URL placeholder (Section 11)"),
+        ("1", "Choose stack, create project, init git, link remote", "Done", "Flask project, requirements.txt, public repository and git history"),
         ("2", "Implement 3 methods (login, data, own method)", "Done", "app/auth.py, app/api.py; evidence/api-demo.txt"),
         ("3", "SQLi, XSS, JWT, password hashing, auth middleware", "Done", "app/db.py, app/security.py; 21 tests"),
         ("4", "CI/CD with SAST and SCA on every push/PR", "Done", ".github/workflows/ci.yml; security/ reports"),
@@ -905,10 +905,10 @@ def add_section_10(doc: Document) -> None:
         doc,
         ["Manual requirement", "Delivered", "Action before submission"],
         [
-            ("Public git repository link", "Local git history; no remote", "Create GitHub/GitLab repo, git remote add, push"),
+            ("Public git repository link", "https://github.com/mycbdys/lab1", "None"),
             ("README with API, security, CVE, root cause, fix, proof", "README.md + report + evidence/", "None"),
             ("Screenshots of SAST/SCA and exploit", "Raw transcripts in evidence/", "Optionally screenshot the same runs"),
-            ("Link to last successful pipeline run", "Workflow committed; not run on GitHub", "Push, open Actions, copy run URL"),
+            ("Link to last successful pipeline run", "https://github.com/mycbdys/lab1/actions/runs/39194790820", "None"),
             ("Folder with fixes", "cve/CVE-2022-29078/fixed/ + patches/fix.diff", "None"),
             ("Title page data", "Filled: 李泽涛 / LiZetao, 23320332, group 23320113", "None"),
         ],
@@ -917,12 +917,11 @@ def add_section_10(doc: Document) -> None:
     )
     add_caption(doc, "Table 11. Submission checklist.")
     doc.add_paragraph(
-        "To push the repository, the student can run the following after creating an empty remote:"
+        "The repository is already published. To update it after a local change, run:"
     )
     add_code(
         doc,
-        """git remote add origin https://github.com/<user>/<repo>.git
-git push -u origin main""",
+        """git push""",
     )
 
 
@@ -940,15 +939,16 @@ def add_section_11(doc: Document) -> None:
         "compose up --build in cve/CVE-2022-29078 to obtain the same vulnerable service on port 3000."
     )
     doc.add_paragraph(
-        "No GitHub/GitLab credentials were available, so the repository could not be pushed and the "
-        "Actions pipeline could not run on GitHub. The workflow file is committed and validated by "
-        "running the same pytest, Bandit and pip-audit commands locally; the two links must be filled "
-        "in after pushing."
+        "The repository is public at https://github.com/mycbdys/lab1. The GitHub Actions pipeline "
+        "ran automatically on the push and all three jobs (Unit tests, SAST, SCA) completed "
+        "successfully: https://github.com/mycbdys/lab1/actions/runs/39194790820. This is stronger "
+        "validation than a local run because the committed workflow executed on a clean GitHub "
+        "runner."
     )
     doc.add_paragraph(
         "The title page now uses the student's data: 李泽涛 (LiZetao), HDU number 23320332, group "
-        "23320113; no variant was assigned, so it is marked N/A. Only the public repository and "
-        "pipeline-run links remain to be filled after pushing."
+        "23320113; no variant was assigned, so it is marked N/A. Both submission links (repository "
+        "and pipeline run) are filled."
     )
     doc.add_paragraph(
         "The manual asks for screenshots. The submission contains raw terminal transcripts with "
@@ -983,9 +983,9 @@ def add_section_12(doc: Document) -> None:
         "properties repeatable rather than one-off."
     )
     doc.add_paragraph(
-        "The main gaps are environmental rather than conceptual: Docker and the GitHub remote were "
-        "unavailable, and the report discloses both. Running the included compose files and pushing "
-        "the repository would close them without changing any of the code or conclusions."
+        "The repository and the pipeline are now live, so the only remaining environmental gap is "
+        "Docker. Running the included compose files would close it without changing any of the code "
+        "or conclusions."
     )
 
 

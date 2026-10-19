@@ -45,18 +45,16 @@ executes and writes its result to a file, which is the proof of code execution.
 
 ### Git remote and pipeline run
 
-No GitHub/GitLab credentials were available, so the repository could not be pushed and
-the pipeline could not be executed on GitHub Actions. The workflow is committed and was
-validated locally: `pytest` (21 passed), Bandit (0 issues) and pip-audit (0 known
-vulnerabilities) were run with the same commands the workflow uses. Two placeholders must
-be replaced before submission:
+The repository is public at <https://github.com/mycbdys/lab1>. The push triggered GitHub
+Actions, and all three jobs (`Unit tests`, `SAST (Bandit)`, `SCA (pip-audit)`) completed
+successfully:
 
-1. `README.md` §10 — public repository URL.
-2. `README.md` §10 — URL of the last successful pipeline run.
+<https://github.com/mycbdys/lab1/actions/runs/39194790820>
 
-The title page now uses the student's data: 李泽涛 (LiZetao), HDU number 23320332,
-group 23320113; no variant was assigned, so it is marked N/A. Only the public repository
-URL and the pipeline-run URL remain as placeholders.
+The same checks also pass locally: `pytest` 21 passed, Bandit 0 issues, pip-audit 0 known
+vulnerabilities. The title page uses the student's data: 李泽涛 (LiZetao), HDU number
+23320332, group 23320113; no variant was assigned, so it is marked N/A. Both submission
+links are filled.
 
 ## Commands used to produce the evidence
 
